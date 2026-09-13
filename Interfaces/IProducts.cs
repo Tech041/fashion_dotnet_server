@@ -8,8 +8,8 @@ namespace EcommerceServer.Interfaces
         Task<List<GetProducts>> GetProductsByCollectionAsync(string collection);
         Task<GetProductDetails> GetProductDetailsAsync(string slug);
         Task<bool> UploadProductAsync(UploadProduct uploadProduct);
-        Task<bool>UpdateProductAsync( string id, UpdateProduct updateProduct);
-        Task<bool> DeleteProductAsync(string id);
+        Task<bool>UpdateProductAsync( Guid id, UpdateProduct updateProduct);
+        Task<bool> DeleteProductAsync(Guid id);
 
         
     }

@@ -24,8 +24,9 @@ namespace EcommerceServer.Migrations
 
             modelBuilder.Entity("EcommerceServer.Entities.Product", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Collection")
                         .IsRequired()
@@ -68,8 +69,9 @@ namespace EcommerceServer.Migrations
 
             modelBuilder.Entity("EcommerceServer.Entities.User", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -94,8 +96,9 @@ namespace EcommerceServer.Migrations
 
             modelBuilder.Entity("EcommerceServer.Entities.Visitor", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");

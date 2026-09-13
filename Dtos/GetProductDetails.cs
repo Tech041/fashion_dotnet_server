@@ -2,7 +2,7 @@
 {
     public class GetProductDetails
     {
-        public string _id { get; set; } = string.Empty;
+        public Guid _id { get; set; } 
         public string name { get; set; } = string.Empty;
         public decimal price { get; set; }
         public string collection {  get; set; } = string.Empty;

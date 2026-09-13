@@ -8,8 +8,7 @@ namespace EcommerceServer.Entities
     public class Product
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public string Id { get; set; } = string.Empty;
+        public Guid Id { get; set; } 
         public string Name { get; set; } = string.Empty;
         public decimal Price { get; set; }
         public string Collection { get; set; } = string.Empty;

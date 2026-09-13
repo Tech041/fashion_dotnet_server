@@ -100,7 +100,7 @@ public class ProductController(IProducts productService) : ControllerBase
 
      
     [HttpPatch("update/{id}")]
-    public async Task<ActionResult> UpdateProduct([FromRoute] string id, [FromBody] UpdateProduct updateProduct)
+    public async Task<ActionResult> UpdateProduct([FromRoute] Guid id, [FromBody] UpdateProduct updateProduct)
     {
         try
         {
@@ -132,7 +132,7 @@ public class ProductController(IProducts productService) : ControllerBase
         }
     }
     [HttpDelete("delete/{id}")]
-    public async Task<ActionResult> DeleteProductAsync([FromRoute] string id)
+    public async Task<ActionResult> DeleteProductAsync([FromRoute] Guid id)
     {
         try
         {

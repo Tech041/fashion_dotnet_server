@@ -133,7 +133,7 @@ namespace EcommerceServer.Services
             // 3. Save product in DB
             var product = new Product
             {
-                Id = Guid.NewGuid().ToString(),
+                
                 Name = uploadProduct.Name,
                 Price = uploadProduct.Price,
                 Collection = uploadProduct.Collection,
@@ -151,7 +151,7 @@ namespace EcommerceServer.Services
         }
 
 
-        public async Task<bool> UpdateProductAsync(string id, UpdateProduct updateProduct)
+        public async Task<bool> UpdateProductAsync(Guid id, UpdateProduct updateProduct)
         {
             var existingProduct = await context.Products.FindAsync(id);
             if (existingProduct == null) return false;
@@ -165,11 +165,13 @@ namespace EcommerceServer.Services
         }
 
 
-       public async Task<bool> DeleteProductAsync(string id)
+       public async Task<bool> DeleteProductAsync(Guid id)
         {
-            var productToDelete = await context.Products.FindAsync(id); 
+            var productToDelete = await context.Products.FindAsync(id);
+            var deletionParams = new DeletionParams(productToDelete.PublicId);
             if (productToDelete == null) return false;
             context.Products.Remove(productToDelete);
+            await cloudinary.DestroyAsync(deletionParams);
             await context.SaveChangesAsync();
             return true;
 

@@ -11,8 +11,7 @@ namespace EcommerceServer.Entities
         public class Visitor
         {
             [Key]
-            [DatabaseGenerated(DatabaseGeneratedOption.None)]
-            public string Id { get; set; } = Guid.NewGuid().ToString(); // EF needs a primary key
+            public Guid Id { get; set; }  // EF needs a primary key
 
 
             public string VisitorId { get; set; } = String.Empty;

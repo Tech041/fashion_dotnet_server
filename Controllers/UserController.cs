@@ -15,7 +15,7 @@ namespace EcommerceServer.Controllers
             _service = service;
         }
 
-        [HttpPost]
+        [HttpPost("register")]
         public async Task<IActionResult> CreateUserAsync([FromBody] CreateUser user)
         {
             try { 

@@ -1,14 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.SqlTypes;
-
-namespace EcommerceServer.Entities
+﻿namespace EcommerceServer.Dtos
 {
-    public class User
+    public class CreateUserToken
     {
-        [Key]
         public Guid Id { get; set; } 
-
         public string Name { get; set; } = string.Empty;
 
         public string Email { get; set; } = string.Empty;
