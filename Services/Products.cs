@@ -7,6 +7,7 @@ using EcommerceServer.Entities;
 using EcommerceServer.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Formats.Webp;
 using SixLabors.ImageSharp.Processing;
 
 namespace EcommerceServer.Services
@@ -103,6 +104,18 @@ namespace EcommerceServer.Services
      
         public async Task<bool> UploadProductAsync(UploadProduct uploadProduct)
         {
+
+            if (uploadProduct == null)
+                throw new ArgumentNullException(nameof(uploadProduct), "UploadProduct payload is null");
+
+            if (uploadProduct.Image == null)
+                throw new Exception("No image file provided");
+
+            if (cloudinary == null)
+                throw new Exception("Cloudinary client not initialized. Check environment variables.");
+
+            if (context == null)
+                throw new Exception("Database context not injected. Check DI setup.");
             // 1. Compress image
             byte[] compressedBytes;
             using (var image = await Image.LoadAsync(uploadProduct.Image.OpenReadStream()))
@@ -114,9 +127,10 @@ namespace EcommerceServer.Services
                 }));
 
                 using var ms = new MemoryStream();
-                await image.SaveAsJpegAsync(ms, new SixLabors.ImageSharp.Formats.Jpeg.JpegEncoder
+                await image.SaveAsWebpAsync(ms, new SixLabors.ImageSharp.Formats.Webp.WebpEncoder
                 {
-                    Quality = 75
+                    Quality = 60,          // lower quality → smaller size
+                    FileFormat = WebpFileFormatType.Lossy // force lossy compression5
                 });
                 compressedBytes = ms.ToArray();
             }
@@ -129,6 +143,8 @@ namespace EcommerceServer.Services
                 Folder = "dotnetproducts"
             };
             var uploadResult = await cloudinary.UploadAsync(uploadParams);
+            if (uploadResult?.SecureUrl == null)
+                throw new Exception("Cloudinary upload failed");
 
             // 3. Save product in DB
             var product = new Product
