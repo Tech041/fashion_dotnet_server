@@ -28,7 +28,8 @@ A robust backend API for managing products, users, and visitor tracking in an eâ
 - **Database**: PostgreSQL (via EF Core, hosted on Neon)  
 - **Image Storage**: Cloudinary (with ImageSharp for preprocessing)  
 - **Authentication**: JWT  
-- **Documentation**: Swagger  
+- **Documentation**: Swagger 
+- **Docker**
 
 ---
 
