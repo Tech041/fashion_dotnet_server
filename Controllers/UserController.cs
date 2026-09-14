@@ -1,6 +1,7 @@
 ﻿using EcommerceServer.Interfaces;
 using EcommerceServer.Dtos;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EcommerceServer.Controllers
 {
@@ -14,7 +15,7 @@ namespace EcommerceServer.Controllers
         {
             _service = service;
         }
-
+        [AllowAnonymous]
         [HttpPost("register")]
         public async Task<IActionResult> CreateUserAsync([FromBody] CreateUser user)
         {
@@ -32,7 +33,7 @@ namespace EcommerceServer.Controllers
                 return BadRequest(new { error = ex.Message });
             }
         }
-
+        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] Login login)
         {

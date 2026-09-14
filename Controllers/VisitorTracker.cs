@@ -9,6 +9,7 @@ namespace EcommerceServer.Controllers
     [ApiController]
     public class VisitorTracker(IVisitorTracker visitorService): ControllerBase
     {
+        [AllowAnonymous]
         [HttpPost("track/{visitorId}")]
 
         public async Task<ActionResult> TrackVisitor([FromRoute] string visitorId)
@@ -24,7 +25,7 @@ namespace EcommerceServer.Controllers
                 return StatusCode(500, new { success = false, message = ex.Message });
             }
         }
-
+        [AllowAnonymous]
         [HttpGet("stats")]
         public async Task<ActionResult<VisitorStat>> GetVisitorStats([FromQuery] int page = 1, [FromQuery] int limit = 10)
         {

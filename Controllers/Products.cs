@@ -1,12 +1,13 @@
 ﻿using EcommerceServer.Dtos;
 using EcommerceServer.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 [Route("api/product")]
 [ApiController]
 public class ProductController(IProducts productService) : ControllerBase
 {
-   
+    [Authorize]
     [HttpPost("upload")]
     public async Task<ActionResult> UploadProduct([FromForm] UploadProduct uploadProduct)
     {
@@ -21,7 +22,7 @@ public class ProductController(IProducts productService) : ControllerBase
             return BadRequest(new { message = ex.Message });
         }
     }
-
+    [AllowAnonymous]
     [HttpGet("all-products")]
 
     public async Task<ActionResult<PaginatedGetProductResponse<GetProducts>>> GetProducts(
@@ -46,7 +47,7 @@ public class ProductController(IProducts productService) : ControllerBase
             });
         }
     }
-
+    [AllowAnonymous]
     [HttpGet("collection")]
     public async Task<ActionResult<List<GetProducts>>> GetProductsByCollection([FromQuery] string collection)
     {
@@ -64,7 +65,7 @@ public class ProductController(IProducts productService) : ControllerBase
             return StatusCode(500, new List<GetProducts>());
         }
     }
-
+    [AllowAnonymous]
     [HttpGet("{slug}")]
     public async Task<ActionResult<GetProductDetails>> GetProductBySlug([FromRoute] string slug)
     {
@@ -98,7 +99,7 @@ public class ProductController(IProducts productService) : ControllerBase
         }
     }
 
-     
+    [Authorize] 
     [HttpPatch("update/{id}")]
     public async Task<ActionResult> UpdateProduct([FromRoute] Guid id, [FromBody] UpdateProduct updateProduct)
     {
@@ -131,6 +132,7 @@ public class ProductController(IProducts productService) : ControllerBase
             });
         }
     }
+    [Authorize]
     [HttpDelete("delete/{id}")]
     public async Task<ActionResult> DeleteProductAsync([FromRoute] Guid id)
     {
