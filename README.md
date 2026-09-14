@@ -1,6 +1,7 @@
 # EcommerceServer
 
-A robust backend API for managing products, users, and visitor tracking in an e‑commerce application. Built with **ASP.NET Core**, integrated with **PostgreSQL (Neon)** for persistence, and **Cloudinary** for image storage and optimization.
+ A robust backend API for managing products, users, and visitor tracking in an e‑commerce application. Built with **ASP.NET Core**, integrated with **PostgreSQL (Neon)** for persistence, and **Cloudinary** for image storage and optimization. The application has been **deployed to Render** for live hosting and **dockerized** for consistent containerized environments.
+
 
 ---
 
